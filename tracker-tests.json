@@ -1,0 +1,736 @@
+[
+  {
+    "version": "v1",
+    "id": "T1",
+    "expected": {
+      "count": 3,
+      "total": "8 ч",
+      "doneHours": 2,
+      "percent": "25%"
+    },
+    "actual": {
+      "tasks": [
+        {
+          "id": "reading",
+          "name": "Чтение",
+          "hours": 2,
+          "done": true
+        },
+        {
+          "id": "practice",
+          "name": "Практика",
+          "hours": 4,
+          "done": false
+        },
+        {
+          "id": "review",
+          "name": "Повторение",
+          "hours": 2,
+          "done": false
+        }
+      ],
+      "total": "8 ч",
+      "done": "1 / 3",
+      "percent": "33%",
+      "visible": [
+        "Чтение",
+        "Практика",
+        "Повторение"
+      ]
+    },
+    "status": "FAIL",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T2",
+    "expected": {
+      "doneHours": 6,
+      "percent": "75%",
+      "practiceDone": true
+    },
+    "actual": {
+      "tasks": [
+        {
+          "id": "reading",
+          "name": "Чтение",
+          "hours": 2,
+          "done": true
+        },
+        {
+          "id": "practice",
+          "name": "Практика",
+          "hours": 4,
+          "done": true
+        },
+        {
+          "id": "review",
+          "name": "Повторение",
+          "hours": 2,
+          "done": false
+        }
+      ],
+      "total": "8 ч",
+      "done": "2 / 3",
+      "percent": "67%",
+      "visible": [
+        "Чтение",
+        "Практика",
+        "Повторение"
+      ]
+    },
+    "status": "FAIL",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T3",
+    "expected": {
+      "visible": [
+        "Практика",
+        "Повторение"
+      ],
+      "percent": "25%",
+      "total": "8 ч",
+      "dataCount": 3
+    },
+    "actual": {
+      "tasks": [
+        {
+          "id": "reading",
+          "name": "Чтение",
+          "hours": 2,
+          "done": true
+        },
+        {
+          "id": "practice",
+          "name": "Практика",
+          "hours": 4,
+          "done": false
+        },
+        {
+          "id": "review",
+          "name": "Повторение",
+          "hours": 2,
+          "done": false
+        }
+      ],
+      "total": "8 ч",
+      "done": "1 / 3",
+      "percent": "33%",
+      "visible": [
+        "Практика",
+        "Повторение"
+      ]
+    },
+    "status": "FAIL",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/empty-title",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "",
+      "hoursValue": "2",
+      "customValidity": "Введите название задачи.",
+      "nativeReportRequested": true
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/spaces-title",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "   ",
+      "hoursValue": "2",
+      "customValidity": "Введите название задачи.",
+      "nativeReportRequested": true
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/empty-hours",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": true
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/negative",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "-1",
+      "customValidity": "",
+      "nativeReportRequested": true
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/zero",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "0",
+      "customValidity": "",
+      "nativeReportRequested": true
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/below-min",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false
+    },
+    "status": "FAIL",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/above-max",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false
+    },
+    "status": "FAIL",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/wrong-step",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false
+    },
+    "status": "FAIL",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/min",
+    "expected": {
+      "added": true,
+      "retainOnReject": false
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/max",
+    "expected": {
+      "added": true,
+      "retainOnReject": false
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v1",
+    "id": "T4/comma",
+    "status": "NOT RUN",
+    "reason": "type=number input sanitization and locale behavior require a real browser; DOM double cannot model them"
+  },
+  {
+    "version": "v1",
+    "id": "T5",
+    "expected": {
+      "emptyCount": 0,
+      "total": "0 ч",
+      "percent": "0%",
+      "canAddAfterDelete": true
+    },
+    "actual": {
+      "empty": {
+        "tasks": [],
+        "total": "0 ч",
+        "done": "0 / 0",
+        "percent": "0%",
+        "visible": []
+      },
+      "afterAdd": {
+        "tasks": [
+          {
+            "id": "1fff2973-d835-47e3-be60-dca3e9d13c6c",
+            "name": "После удаления",
+            "hours": 1,
+            "done": false
+          }
+        ],
+        "total": "1 ч",
+        "done": "0 / 1",
+        "percent": "0%",
+        "visible": [
+          "После удаления"
+        ]
+      }
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T1",
+    "expected": {
+      "count": 3,
+      "total": "8 ч",
+      "doneHours": 2,
+      "percent": "25%"
+    },
+    "actual": {
+      "tasks": [
+        {
+          "id": "task-1",
+          "title": "Чтение",
+          "hours": 2,
+          "done": true
+        },
+        {
+          "id": "task-2",
+          "title": "Практика",
+          "hours": 4,
+          "done": false
+        },
+        {
+          "id": "task-3",
+          "title": "Повторение",
+          "hours": 2,
+          "done": false
+        }
+      ],
+      "total": "8 ч",
+      "done": "2 ч",
+      "percent": "25%",
+      "visible": [
+        "Чтение",
+        "Практика",
+        "Повторение"
+      ]
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T2",
+    "expected": {
+      "doneHours": 6,
+      "percent": "75%",
+      "practiceDone": true
+    },
+    "actual": {
+      "tasks": [
+        {
+          "id": "task-1",
+          "title": "Чтение",
+          "hours": 2,
+          "done": true
+        },
+        {
+          "id": "task-2",
+          "title": "Практика",
+          "hours": 4,
+          "done": true
+        },
+        {
+          "id": "task-3",
+          "title": "Повторение",
+          "hours": 2,
+          "done": false
+        }
+      ],
+      "total": "8 ч",
+      "done": "6 ч",
+      "percent": "75%",
+      "visible": [
+        "Чтение",
+        "Практика",
+        "Повторение"
+      ]
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T3",
+    "expected": {
+      "visible": [
+        "Практика",
+        "Повторение"
+      ],
+      "percent": "25%",
+      "total": "8 ч",
+      "dataCount": 3
+    },
+    "actual": {
+      "tasks": [
+        {
+          "id": "task-1",
+          "title": "Чтение",
+          "hours": 2,
+          "done": true
+        },
+        {
+          "id": "task-2",
+          "title": "Практика",
+          "hours": 4,
+          "done": false
+        },
+        {
+          "id": "task-3",
+          "title": "Повторение",
+          "hours": 2,
+          "done": false
+        }
+      ],
+      "total": "8 ч",
+      "done": "2 ч",
+      "percent": "25%",
+      "visible": [
+        "Практика",
+        "Повторение"
+      ]
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/empty-title",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "",
+      "hoursValue": "2",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "Введите название задачи.",
+      "hoursError": ""
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/spaces-title",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "   ",
+      "hoursValue": "2",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "Введите название задачи.",
+      "hoursError": ""
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/empty-hours",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": "Введите количество часов."
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/negative",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "-1",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": "Укажите число от 0,5 до 24 с шагом 0,5."
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/zero",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "0",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": "Укажите число от 0,5 до 24 с шагом 0,5."
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/below-min",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "0.1",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": "Укажите число от 0,5 до 24 с шагом 0,5."
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/above-max",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "24.5",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": "Укажите число от 0,5 до 24 с шагом 0,5."
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/wrong-step",
+    "expected": {
+      "added": false,
+      "retainOnReject": true
+    },
+    "actual": {
+      "added": false,
+      "retained": true,
+      "titleValue": "Тест",
+      "hoursValue": "0.75",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": "Укажите число от 0,5 до 24 с шагом 0,5."
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/min",
+    "expected": {
+      "added": true,
+      "retainOnReject": false
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": ""
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/max",
+    "expected": {
+      "added": true,
+      "retainOnReject": false
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": ""
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T4/comma",
+    "expected": {
+      "added": true,
+      "retainOnReject": false
+    },
+    "actual": {
+      "added": true,
+      "retained": false,
+      "titleValue": "",
+      "hoursValue": "",
+      "customValidity": "",
+      "nativeReportRequested": false,
+      "titleError": "",
+      "hoursError": ""
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  },
+  {
+    "version": "v2",
+    "id": "T5",
+    "expected": {
+      "emptyCount": 0,
+      "total": "0 ч",
+      "percent": "0%",
+      "canAddAfterDelete": true
+    },
+    "actual": {
+      "empty": {
+        "tasks": [],
+        "total": "0 ч",
+        "done": "0 ч",
+        "percent": "0%",
+        "visible": []
+      },
+      "afterAdd": {
+        "tasks": [
+          {
+            "id": "task-4",
+            "title": "После удаления",
+            "hours": 1,
+            "done": false
+          }
+        ],
+        "total": "1 ч",
+        "done": "0 ч",
+        "percent": "0%",
+        "visible": [
+          "После удаления"
+        ]
+      }
+    },
+    "status": "PASS",
+    "scope": "Original JS with controlled DOM double; not a browser/UI check"
+  }
+]

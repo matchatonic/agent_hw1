@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Учебные задачи</title>
+
+  <style>
+
+    :root {
+
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      color: #19243a;
+
+      background: #f2f5fb;
+
+      accent-color: #4f46e5;
+
+    }
+
+
+
+    * { box-sizing: border-box; }
+
+
+
+    body {
+
+      margin: 0;
+
+      padding: 40px 16px;
+
+    }
+
+
+
+    main {
+
+      max-width: 760px;
+
+      margin: auto;
+
+    }
+
+
+
+    h1 {
+
+      margin: 0 0 8px;
+
+      font-size: clamp(26px, 5vw, 36px);
+
+    }
+
+
+
+    .subtitle {
+
+      margin: 0 0 26px;
+
+      color: #647087;
+
+    }
+
+
+
+    .card {
+
+      background: #fff;
+
+      border: 1px solid #e1e6f0;
+
+      border-radius: 20px;
+
+      padding: 24px;
+
+      box-shadow: 0 12px 36px #22335a08;
+
+    }
+
+
+
+    .stats {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 12px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+
+    .stat {
+
+      background: #f5f6fc;
+
+      padding: 16px;
+
+      border-radius: 12px;
+
+    }
+
+
+
+    .stat strong {
+
+      display: block;
+
+      font-size: 24px;
+
+      margin-bottom: 4px;
+
+      overflow-wrap: anywhere;
+
+    }
+
+
+
+    .stat span {
+
+      color: #647087;
+
+      font-size: 13px;
+
+    }
+
+
+
+    progress {
+
+      display: block;
+
+      width: 100%;
+
+      height: 12px;
+
+      border: 0;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      background: #e9ecf5;
+
+    }
+
+
+
+    progress::-webkit-progress-bar { background: #e9ecf5; }
+
+    progress::-webkit-progress-value { background: #4f46e5; }
+
+    progress::-moz-progress-bar { background: #4f46e5; }
+
+
+
+    form {
+
+      display: grid;
+
+      grid-template-columns: minmax(0, 1fr) 110px auto;
+
+      gap: 12px;
+
+      align-items: end;
+
+      margin: 26px 0;
+
+    }
+
+
+
+    label.field {
+
+      display: grid;
+
+      gap: 7px;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+    }
+
+
+
+    input[type="text"], input[type="number"] {
+
+      width: 100%;
+
+      min-width: 0;
+
+      padding: 12px;
+
+      border: 1px solid #cbd2e2;
+
+      border-radius: 10px;
+
+      font: inherit;
+
+      background: #fff;
+
+      color: inherit;
+
+    }
+
+
+
+    button {
+
+      min-height: 44px;
+
+      padding: 10px 16px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      font: inherit;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+    }
+
+
+
+    button:hover { filter: brightness(.95); }
+
+
+
+    button:focus-visible, input:focus-visible {
+
+      outline: 3px solid #a5b4fc;
+
+      outline-offset: 3px;
+
+    }
+
+
+
+    .add {
+
+      background: #4f46e5;
+
+      color: #fff;
+
+    }
+
+
+
+    .filters {
+
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 16px;
+
+    }
+
+
+
+    .filters button {
+
+      background: #f0f2f8;
+
+      color: #4c5870;
+
+    }
+
+
+
+    .filters button[aria-pressed="true"] {
+
+      background: #e6e5ff;
+
+      color: #3730a3;
+
+    }
+
+
+
+    ul {
+
+      list-style: none;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+
+    .task {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 16px 0;
+
+      border-bottom: 1px solid #edf0f6;
+
+    }
+
+
+
+    .task:last-child { border-bottom: 0; }
+
+
+
+    .task-label {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      flex: 1;
+
+      min-width: 0;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .task input {
+
+      width: 21px;
+
+      height: 21px;
+
+      flex-shrink: 0;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .task-text { min-width: 0; }
+
+
+
+    .task-title {
+
+      display: block;
+
+      overflow-wrap: anywhere;
+
+      font-weight: 600;
+
+    }
+
+
+
+    .task-meta {
+
+      display: block;
+
+      margin-top: 4px;
+
+      color: #647087;
+
+      font-size: 13px;
+
+    }
+
+
+
+    .task.done .task-title {
+
+      text-decoration: line-through;
+
+      color: #7b8496;
+
+    }
+
+
+
+    .delete {
+
+      background: #fff0f1;
+
+      color: #b4233b;
+
+      flex-shrink: 0;
+
+      font-size: 14px;
+
+    }
+
+
+
+    .empty {
+
+      text-align: center;
+
+      padding: 32px 12px;
+
+      color: #647087;
+
+    }
+
+
+
+    .notice {
+
+      margin: 18px 0 0;
+
+      color: #647087;
+
+      font-size: 13px;
+
+      text-align: center;
+
+    }
+
+
+
+    [hidden] { display: none !important; }
+
+
+
+    @media (max-width: 560px) {
+
+      body { padding: 24px 12px; }
+
+      .card { padding: 18px; }
+
+      .stats { gap: 8px; }
+
+      .stat { padding: 12px 8px; }
+
+      .stat strong { font-size: 21px; }
+
+      form { grid-template-columns: minmax(0, 1fr) 100px; }
+
+      .add { grid-column: 1 / -1; }
+
+      .delete { padding: 10px; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <main>
+
+    <header>
+
+      <h1>Учебные задачи</h1>
+
+      <p class="subtitle">Планируйте время и отмечайте свой прогресс.</p>
+
+    </header>
+
+
+
+    <section class="card" aria-label="Трекер задач">
+
+      <div class="stats" aria-live="polite" aria-atomic="true">
+
+        <div class="stat">
+
+          <strong id="total-hours">0 ч</strong>
+
+          <span>Всего часов</span>
+
+        </div>
+
+        <div class="stat">
+
+          <strong id="completed-count">0 / 0</strong>
+
+          <span>Задач готово</span>
+
+        </div>
+
+        <div class="stat">
+
+          <strong id="percentage">0%</strong>
+
+          <span>Выполнено</span>
+
+        </div>
+
+      </div>
+
+
+
+      <progress id="progress" max="100" value="0"
+
+                aria-label="Процент готовых задач"></progress>
+
+
+
+      <form id="task-form">
+
+        <label class="field">
+
+          Название задачи
+
+          <input id="task-name" type="text" placeholder="Например, конспект"
+
+                 maxlength="200" required>
+
+        </label>
+
+
+
+        <label class="field">
+
+          Часы
+
+          <input id="task-hours" type="number" placeholder="2"
+
+                 min="0.1" max="1000000" step="any" required>
+
+        </label>
+
+
+
+        <button class="add" type="submit">Добавить</button>
+
+      </form>
+
+
+
+      <div class="filters" role="group" aria-label="Фильтр задач">
+
+        <button type="button" data-filter="all" aria-pressed="true">Все</button>
+
+        <button type="button" data-filter="active" aria-pressed="false">Активные</button>
+
+        <button type="button" data-filter="done" aria-pressed="false">Готовые</button>
+
+      </div>
+
+
+
+      <ul id="task-list" aria-label="Учебные задачи"></ul>
+
+      <p id="empty-message" class="empty" hidden></p>
+
+    </section>
+
+
+
+    <p id="storage-notice" class="notice">
+
+      Изменения сохраняются в этом браузере. Статистика учитывает все задачи.
+
+    </p>
+
+  </main>
+
+
+
+  <script>
+
+    "use strict";
+
+
+
+    const STORAGE_KEY = "study-task-tracker-v1";
+
+    const initialTasks = [
+
+      { id: "reading", name: "Чтение", hours: 2, done: true },
+
+      { id: "practice", name: "Практика", hours: 4, done: false },
+
+      { id: "review", name: "Повторение", hours: 2, done: false }
+
+    ];
+
+
+
+    const form = document.getElementById("task-form");
+
+    const nameInput = document.getElementById("task-name");
+
+    const hoursInput = document.getElementById("task-hours");
+
+    const list = document.getElementById("task-list");
+
+    const emptyMessage = document.getElementById("empty-message");
+
+    const filterButtons = document.querySelectorAll("[data-filter]");
+
+    const storageNotice = document.getElementById("storage-notice");
+
+
+
+    const numberFormat = new Intl.NumberFormat("ru-RU", {
+
+      maximumFractionDigits: 2
+
+    });
+
+
+
+    let filter = "all";
+
+    let tasks = loadTasks();
+
+
+
+    function reportStorageProblem() {
+
+      storageNotice.textContent =
+
+        "Сохранение недоступно. Изменения работают до закрытия или обновления страницы.";
+
+    }
+
+
+
+    function isValidTask(task) {
+
+      return task !== null &&
+
+        typeof task === "object" &&
+
+        typeof task.id === "string" &&
+
+        typeof task.name === "string" &&
+
+        task.name.trim().length > 0 &&
+
+        task.name.length <= 200 &&
+
+        Number.isFinite(task.hours) &&
+
+        task.hours >= 0.1 &&
+
+        task.hours <= 1000000 &&
+
+        typeof task.done === "boolean";
+
+    }
+
+
+
+    function loadTasks() {
+
+      try {
+
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+
+
+        if (saved !== null) {
+
+          const parsed = JSON.parse(saved);
+
+          if (Array.isArray(parsed) &&
+
+              parsed.every(isValidTask) &&
+
+              new Set(parsed.map(task => task.id)).size === parsed.length) {
+
+            return parsed;
+
+          }
+
+        }
+
+      } catch {
+
+        reportStorageProblem();
+
+      }
+
+
+
+      return initialTasks.map(task => ({ ...task }));
+
+    }
+
+
+
+    function saveTasks() {
+
+      try {
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+
+      } catch {
+
+        reportStorageProblem();
+
+      }
+
+    }
+
+
+
+    function createId() {
+
+      if (window.crypto && typeof window.crypto.randomUUID === "function") {
+
+        return window.crypto.randomUUID();
+
+      }
+
+
+
+      let id;
+
+      do {
+
+        id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+      } while (tasks.some(task => task.id === id));
+
+      return id;
+
+    }
+
+
+
+    function render() {
+
+      const completed = tasks.filter(task => task.done).length;
+
+      const hours = tasks.reduce((sum, task) => sum + task.hours, 0);
+
+      const percentage = tasks.length
+
+        ? Math.round(completed / tasks.length * 100)
+
+        : 0;
+
+
+
+      document.getElementById("total-hours").textContent =
+
+        numberFormat.format(hours) + " ч";
+
+      document.getElementById("completed-count").textContent =
+
+        completed + " / " + tasks.length;
+
+      document.getElementById("percentage").textContent = percentage + "%";
+
+      document.getElementById("progress").value = percentage;
+
+
+
+      filterButtons.forEach(button => {
+
+        button.setAttribute("aria-pressed", String(button.dataset.filter === filter));
+
+      });
+
+
+
+      const visibleTasks = tasks.filter(task =>
+
+        filter === "all" ||
+
+        (filter === "done" && task.done) ||
+
+        (filter === "active" && !task.done)
+
+      );
+
+
+
+      list.replaceChildren();
+
+
+
+      visibleTasks.forEach(task => {
+
+        const item = document.createElement("li");
+
+        item.className = "task" + (task.done ? " done" : "");
+
+
+
+        const label = document.createElement("label");
+
+        label.className = "task-label";
+
+
+
+        const checkbox = document.createElement("input");
+
+        checkbox.type = "checkbox";
+
+        checkbox.checked = task.done;
+
+        checkbox.addEventListener("change", () => {
+
+          task.done = checkbox.checked;
+
+          saveTasks();
+
+          render();
+
+          const replacement = Array.from(list.children).find(
+
+            row => row.dataset.id === task.id
+
+          );
+
+          if (replacement) {
+
+            replacement.querySelector("input").focus();
+
+          } else {
+
+            document.querySelector('[data-filter="' + filter + '"]').focus();
+
+          }
+
+        });
+
+
+
+        const text = document.createElement("span");
+
+        text.className = "task-text";
+
+
+
+        const title = document.createElement("span");
+
+        title.className = "task-title";
+
+        title.textContent = task.name;
+
+
+
+        const meta = document.createElement("span");
+
+        meta.className = "task-meta";
+
+        meta.textContent =
+
+          numberFormat.format(task.hours) + " ч · " +
+
+          (task.done ? "Готово" : "Активно");
+
+
+
+        text.append(title, meta);
+
+        label.append(checkbox, text);
+
+
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.type = "button";
+
+        deleteButton.className = "delete";
+
+        deleteButton.textContent = "Удалить";
+
+        deleteButton.setAttribute("aria-label", "Удалить задачу: " + task.name);
+
+        deleteButton.addEventListener("click", () => {
+
+          const index = Array.from(list.children).indexOf(item);
+
+          tasks = tasks.filter(candidate => candidate.id !== task.id);
+
+          saveTasks();
+
+          render();
+
+
+
+          const nextItem = list.children[Math.min(index, list.children.length - 1)];
+
+          if (nextItem) {
+
+            nextItem.querySelector(".delete").focus();
+
+          } else {
+
+            nameInput.focus();
+
+          }
+
+        });
+
+
+
+        item.dataset.id = task.id;
+
+        item.append(label, deleteButton);
+
+        list.append(item);
+
+      });
+
+
+
+      emptyMessage.hidden = visibleTasks.length > 0;
+
+      emptyMessage.textContent = tasks.length === 0
+
+        ? "Пока нет задач. Добавьте первую!"
+
+        : filter === "done"
+
+          ? "Готовых задач пока нет."
+
+          : "Все задачи выполнены!";
+
+    }
+
+
+
+    nameInput.addEventListener("input", () => {
+
+      nameInput.setCustomValidity("");
+
+    });
+
+
+
+    form.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+
+
+      const name = nameInput.value.trim();
+
+      const hours = hoursInput.valueAsNumber;
+
+
+
+      if (!name) {
+
+        nameInput.setCustomValidity("Введите название задачи.");
+
+        nameInput.reportValidity();
+
+        return;
+
+      }
+
+
+
+      if (!Number.isFinite(hours) || hours < 0.1 || hours > 1000000) {
+
+        hoursInput.reportValidity();
+
+        return;
+
+      }
+
+
+
+      tasks.push({ id: createId(), name, hours, done: false });
+
+      filter = "all";
+
+      saveTasks();
+
+      render();
+
+      form.reset();
+
+      nameInput.focus();
+
+    });
+
+
+
+    filterButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        filter = button.dataset.filter;
+
+        render();
+
+      });
+
+    });
+
+
+
+    render();
+
+  </script>
+
+</body>
+
+</html>

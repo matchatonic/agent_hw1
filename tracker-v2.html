@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Учебная неделя — мини-трекер</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #182b3a; background: #f2f5f7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px 16px; }
+    main { max-width: 700px; margin: auto; }
+    h1 { margin: 0 0 8px; font-size: clamp(1.65rem, 5vw, 2.25rem); }
+    h2 { margin: 0 0 20px; font-size: 1.2rem; }
+    p { line-height: 1.5; }
+    .intro { color: #506172; margin: 0 0 24px; }
+    .card { background: white; border: 1px solid #d7e0e6; border-radius: 16px; padding: 24px; margin-bottom: 20px; min-width: 0; }
+    .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .summary p { margin: 0; }
+    .summary span { display: block; font-size: .85rem; color: #506172; }
+    .summary strong { display: block; font-size: 1.5rem; margin-top: 4px; overflow-wrap: anywhere; }
+    progress { display: block; width: 100%; height: 16px; margin-top: 20px; accent-color: #17644d; }
+    .form-grid { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 16px; }
+    label { display: block; font-weight: 600; margin-bottom: 8px; }
+    input, select, button { font: inherit; }
+    input[type="text"], select { width: 100%; min-width: 0; min-height: 44px; border: 1px solid #778896; border-radius: 8px; padding: 10px 12px; color: inherit; background: white; }
+    input[aria-invalid="true"] { border-color: #ac2525; }
+    .hint { margin: 6px 0 0; color: #506172; font-size: .85rem; }
+    .error { margin: 6px 0 0; color: #ac2525; font-size: .9rem; }
+    .error:empty { display: none; }
+    button { min-height: 44px; padding: 10px 16px; border: 1px solid #17644d; border-radius: 8px; background: #17644d; color: white; cursor: pointer; }
+    button:hover { background: #104c3a; }
+    :focus-visible { outline: 3px solid #2867c0; outline-offset: 3px; }
+    .submit { margin-top: 20px; }
+    .list-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .list-header h2 { margin: 0; }
+    .filter { width: 180px; max-width: 100%; }
+    .filter label { font-size: .85rem; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    .task { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid #d7e0e6; }
+    .task label { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; margin: 0; cursor: pointer; }
+    .task input { width: 22px; height: 22px; flex-shrink: 0; accent-color: #17644d; }
+    .task-copy { min-width: 0; overflow-wrap: anywhere; }
+    .task-title { display: block; }
+    .task-meta { display: block; color: #506172; font-size: .85rem; font-weight: 400; margin-top: 4px; }
+    .task.is-done .task-title { text-decoration: line-through; color: #506172; }
+    .delete { flex-shrink: 0; background: white; border-color: #d3b7b7; color: #9a2222; padding: 10px; }
+    .delete:hover { background: #fff0f0; }
+    .empty { margin: 0; color: #506172; }
+    .status { min-height: 1.5em; color: #506172; font-size: .9rem; }
+    noscript p { color: #ac2525; }
+    @media (max-width: 480px) {
+      body { padding: 20px 12px; }
+      .card { padding: 18px; }
+      .form-grid { grid-template-columns: minmax(0, 1fr); }
+      .submit { width: 100%; }
+      .summary { gap: 8px; }
+      .summary strong { font-size: 1.3rem; }
+      .task { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Учебная неделя</h1>
+    <p class="intro">Планируйте задачи и отмечайте выполненное.</p>
+    <noscript><p>Для работы трекера включите JavaScript в браузере.</p></noscript>
+
+    <section class="card" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Прогресс недели</h2>
+      <div class="summary" aria-live="polite" aria-atomic="true">
+        <p><span>Всего</span><strong id="total-hours">8 ч</strong></p>
+        <p><span>Выполнено</span><strong id="done-hours">2 ч</strong></p>
+        <p><span>Прогресс</span><strong id="percent">25%</strong></p>
+      </div>
+      <progress id="progress" max="100" value="25" aria-label="Прогресс по часам">25%</progress>
+    </section>
+
+    <section class="card" aria-labelledby="form-heading">
+      <h2 id="form-heading">Добавить задачу</h2>
+      <form id="task-form" novalidate>
+        <div class="form-grid">
+          <div>
+            <label for="title">Название задачи</label>
+            <input id="title" name="title" type="text" required aria-describedby="title-error">
+            <p class="error" id="title-error" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="hours">Часы</label>
+            <input id="hours" name="hours" type="text" inputmode="decimal" required aria-describedby="hours-hint hours-error">
+            <p class="hint" id="hours-hint">0,5–24, шаг 0,5</p>
+            <p class="error" id="hours-error" aria-live="polite"></p>
+          </div>
+        </div>
+        <button class="submit" type="submit">Добавить задачу</button>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="tasks-heading">
+      <div class="list-header">
+        <h2 id="tasks-heading">Задачи</h2>
+        <div class="filter">
+          <label for="filter">Показать задачи</label>
+          <select id="filter">
+            <option value="all">Все</option>
+            <option value="active">Активные</option>
+          </select>
+        </div>
+      </div>
+      <ul id="task-list"></ul>
+      <p class="empty" id="empty" hidden></p>
+    </section>
+    <p class="status" id="status" role="status"></p>
+    <p class="hint">Задачи хранятся в памяти. При перезагрузке страницы появится стартовый пример.</p>
+  </main>
+
+  <script>
+    'use strict';
+
+    let tasks = [
+      { id: 'task-1', title: 'Чтение', hours: 2, done: true },
+      { id: 'task-2', title: 'Практика', hours: 4, done: false },
+      { id: 'task-3', title: 'Повторение', hours: 2, done: false }
+    ];
+    let nextId = 4;
+    const byId = (id) => document.getElementById(id);
+    const form = byId('task-form');
+    const titleInput = byId('title');
+    const hoursInput = byId('hours');
+    const filter = byId('filter');
+    const list = byId('task-list');
+    const numberFormat = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 1 });
+    const formatHours = (hours) => numberFormat.format(hours) + ' ч';
+
+    function validate(titleValue, hoursValue) {
+      const title = titleValue.trim();
+      const rawHours = hoursValue.trim();
+      // Accept both Russian decimal commas and decimal points.
+      const decimal = /^[+-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)$/;
+      const hours = rawHours === '' ? NaN : Number(rawHours.replace(',', '.'));
+      return {
+        title,
+        hours,
+        titleError: title ? '' : 'Введите название задачи.',
+        hoursError: rawHours === ''
+          ? 'Введите количество часов.'
+          : !decimal.test(rawHours) || !Number.isFinite(hours) ||
+            hours < 0.5 || hours > 24 || !Number.isInteger(hours * 2)
+            ? 'Укажите число от 0,5 до 24 с шагом 0,5.' : ''
+      };
+    }
+
+    function totals(items) {
+      const totalHours = items.reduce((sum, task) => sum + task.hours, 0);
+      const doneHours = items.reduce((sum, task) => sum + (task.done ? task.hours : 0), 0);
+      return { totalHours, doneHours, progress: totalHours === 0 ? 0 : Math.round(100 * doneHours / totalHours) };
+    }
+
+    function showError(input, errorId, message) {
+      input.setAttribute('aria-invalid', String(Boolean(message)));
+      byId(errorId).textContent = message;
+    }
+
+    function render() {
+      const summary = totals(tasks);
+      byId('total-hours').textContent = formatHours(summary.totalHours);
+      byId('done-hours').textContent = formatHours(summary.doneHours);
+      byId('percent').textContent = summary.progress + '%';
+      byId('progress').value = summary.progress;
+      byId('progress').textContent = summary.progress + '%';
+
+      const visible = tasks.filter((task) => filter.value !== 'active' || !task.done);
+      list.replaceChildren();
+      for (const task of visible) {
+        const row = document.createElement('li');
+        row.className = 'task' + (task.done ? ' is-done' : '');
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = task.done;
+        checkbox.dataset.action = 'toggle';
+        checkbox.dataset.id = task.id;
+        checkbox.setAttribute('aria-label', 'Выполнено: ' + task.title);
+        const copy = document.createElement('span');
+        copy.className = 'task-copy';
+        const title = document.createElement('span');
+        title.className = 'task-title';
+        title.textContent = task.title;
+        const meta = document.createElement('span');
+        meta.className = 'task-meta';
+        meta.textContent = formatHours(task.hours) + (task.done ? ' · выполнено' : ' · в плане');
+        copy.append(title, meta);
+        label.append(checkbox, copy);
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'delete';
+        remove.textContent = 'Удалить';
+        remove.dataset.action = 'delete';
+        remove.dataset.id = task.id;
+        remove.setAttribute('aria-label', 'Удалить задачу: ' + task.title);
+        row.append(label, remove);
+        list.append(row);
+      }
+      byId('empty').hidden = visible.length !== 0;
+      byId('empty').textContent = tasks.length === 0 ? 'Задач пока нет. Добавьте первую.' : 'Активных задач нет.';
+    }
+
+    function restoreListFocus(id, action, position) {
+      const controls = Array.from(list.querySelectorAll('[data-action="' + action + '"]'));
+      const target = controls.find((control) => control.dataset.id === id) ||
+        controls[Math.min(position, controls.length - 1)];
+      (target || filter).focus();
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const result = validate(titleInput.value, hoursInput.value);
+      showError(titleInput, 'title-error', result.titleError);
+      showError(hoursInput, 'hours-error', result.hoursError);
+      if (result.titleError || result.hoursError) {
+        (result.titleError ? titleInput : hoursInput).focus();
+        return;
+      }
+      tasks.push({ id: 'task-' + nextId++, title: result.title, hours: result.hours, done: false });
+      form.reset();
+      render();
+      byId('status').textContent = 'Добавлена задача «' + result.title + '».';
+      titleInput.focus();
+    });
+
+    filter.addEventListener('change', render);
+
+    list.addEventListener('change', (event) => {
+      const control = event.target;
+      if (control.dataset.action !== 'toggle') return;
+      const task = tasks.find((item) => item.id === control.dataset.id);
+      if (!task) return;
+      const position = tasks.filter((item) => filter.value !== 'active' || !item.done)
+        .findIndex((item) => item.id === task.id);
+      task.done = control.checked;
+      render();
+      byId('status').textContent = 'Задача «' + task.title + '»: ' + (task.done ? 'выполнена.' : 'в плане.');
+      restoreListFocus(task.id, 'toggle', position);
+    });
+
+    list.addEventListener('click', (event) => {
+      const control = event.target.closest('button[data-action="delete"]');
+      if (!control) return;
+      const task = tasks.find((item) => item.id === control.dataset.id);
+      if (!task) return;
+      const position = tasks.filter((item) => filter.value !== 'active' || !item.done)
+        .findIndex((item) => item.id === task.id);
+      tasks = tasks.filter((item) => item.id !== task.id);
+      render();
+      byId('status').textContent = 'Удалена задача «' + task.title + '».';
+      restoreListFocus(task.id, 'delete', position);
+    });
+
+    render();
+  </script>
+</body>
+</html>

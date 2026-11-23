@@ -1,0 +1,66 @@
+[v1] T1 FAIL
+{"version":"v1","id":"T1","expected":{"count":3,"total":"8 ч","doneHours":2,"percent":"25%"},"actual":{"tasks":[{"id":"reading","name":"Чтение","hours":2,"done":true},{"id":"practice","name":"Практика","hours":4,"done":false},{"id":"review","name":"Повторение","hours":2,"done":false}],"total":"8 ч","done":"1 / 3","percent":"33%","visible":["Чтение","Практика","Повторение"]},"status":"FAIL","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T2 FAIL
+{"version":"v1","id":"T2","expected":{"doneHours":6,"percent":"75%","practiceDone":true},"actual":{"tasks":[{"id":"reading","name":"Чтение","hours":2,"done":true},{"id":"practice","name":"Практика","hours":4,"done":true},{"id":"review","name":"Повторение","hours":2,"done":false}],"total":"8 ч","done":"2 / 3","percent":"67%","visible":["Чтение","Практика","Повторение"]},"status":"FAIL","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T3 FAIL
+{"version":"v1","id":"T3","expected":{"visible":["Практика","Повторение"],"percent":"25%","total":"8 ч","dataCount":3},"actual":{"tasks":[{"id":"reading","name":"Чтение","hours":2,"done":true},{"id":"practice","name":"Практика","hours":4,"done":false},{"id":"review","name":"Повторение","hours":2,"done":false}],"total":"8 ч","done":"1 / 3","percent":"33%","visible":["Практика","Повторение"]},"status":"FAIL","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/empty-title PASS
+{"version":"v1","id":"T4/empty-title","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"","hoursValue":"2","customValidity":"Введите название задачи.","nativeReportRequested":true},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/spaces-title PASS
+{"version":"v1","id":"T4/spaces-title","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"   ","hoursValue":"2","customValidity":"Введите название задачи.","nativeReportRequested":true},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/empty-hours PASS
+{"version":"v1","id":"T4/empty-hours","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"","customValidity":"","nativeReportRequested":true},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/negative PASS
+{"version":"v1","id":"T4/negative","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"-1","customValidity":"","nativeReportRequested":true},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/zero PASS
+{"version":"v1","id":"T4/zero","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"0","customValidity":"","nativeReportRequested":true},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/below-min FAIL
+{"version":"v1","id":"T4/below-min","expected":{"added":false,"retainOnReject":true},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false},"status":"FAIL","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/above-max FAIL
+{"version":"v1","id":"T4/above-max","expected":{"added":false,"retainOnReject":true},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false},"status":"FAIL","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/wrong-step FAIL
+{"version":"v1","id":"T4/wrong-step","expected":{"added":false,"retainOnReject":true},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false},"status":"FAIL","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/min PASS
+{"version":"v1","id":"T4/min","expected":{"added":true,"retainOnReject":false},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/max PASS
+{"version":"v1","id":"T4/max","expected":{"added":true,"retainOnReject":false},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v1] T4/comma NOT RUN
+{"version":"v1","id":"T4/comma","status":"NOT RUN","reason":"type=number input sanitization and locale behavior require a real browser; DOM double cannot model them"}
+[v1] T5 PASS
+{"version":"v1","id":"T5","expected":{"emptyCount":0,"total":"0 ч","percent":"0%","canAddAfterDelete":true},"actual":{"empty":{"tasks":[],"total":"0 ч","done":"0 / 0","percent":"0%","visible":[]},"afterAdd":{"tasks":[{"id":"1fff2973-d835-47e3-be60-dca3e9d13c6c","name":"После удаления","hours":1,"done":false}],"total":"1 ч","done":"0 / 1","percent":"0%","visible":["После удаления"]}},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T1 PASS
+{"version":"v2","id":"T1","expected":{"count":3,"total":"8 ч","doneHours":2,"percent":"25%"},"actual":{"tasks":[{"id":"task-1","title":"Чтение","hours":2,"done":true},{"id":"task-2","title":"Практика","hours":4,"done":false},{"id":"task-3","title":"Повторение","hours":2,"done":false}],"total":"8 ч","done":"2 ч","percent":"25%","visible":["Чтение","Практика","Повторение"]},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T2 PASS
+{"version":"v2","id":"T2","expected":{"doneHours":6,"percent":"75%","practiceDone":true},"actual":{"tasks":[{"id":"task-1","title":"Чтение","hours":2,"done":true},{"id":"task-2","title":"Практика","hours":4,"done":true},{"id":"task-3","title":"Повторение","hours":2,"done":false}],"total":"8 ч","done":"6 ч","percent":"75%","visible":["Чтение","Практика","Повторение"]},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T3 PASS
+{"version":"v2","id":"T3","expected":{"visible":["Практика","Повторение"],"percent":"25%","total":"8 ч","dataCount":3},"actual":{"tasks":[{"id":"task-1","title":"Чтение","hours":2,"done":true},{"id":"task-2","title":"Практика","hours":4,"done":false},{"id":"task-3","title":"Повторение","hours":2,"done":false}],"total":"8 ч","done":"2 ч","percent":"25%","visible":["Практика","Повторение"]},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/empty-title PASS
+{"version":"v2","id":"T4/empty-title","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"","hoursValue":"2","customValidity":"","nativeReportRequested":false,"titleError":"Введите название задачи.","hoursError":""},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/spaces-title PASS
+{"version":"v2","id":"T4/spaces-title","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"   ","hoursValue":"2","customValidity":"","nativeReportRequested":false,"titleError":"Введите название задачи.","hoursError":""},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/empty-hours PASS
+{"version":"v2","id":"T4/empty-hours","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":"Введите количество часов."},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/negative PASS
+{"version":"v2","id":"T4/negative","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"-1","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":"Укажите число от 0,5 до 24 с шагом 0,5."},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/zero PASS
+{"version":"v2","id":"T4/zero","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"0","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":"Укажите число от 0,5 до 24 с шагом 0,5."},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/below-min PASS
+{"version":"v2","id":"T4/below-min","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"0.1","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":"Укажите число от 0,5 до 24 с шагом 0,5."},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/above-max PASS
+{"version":"v2","id":"T4/above-max","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"24.5","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":"Укажите число от 0,5 до 24 с шагом 0,5."},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/wrong-step PASS
+{"version":"v2","id":"T4/wrong-step","expected":{"added":false,"retainOnReject":true},"actual":{"added":false,"retained":true,"titleValue":"Тест","hoursValue":"0.75","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":"Укажите число от 0,5 до 24 с шагом 0,5."},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/min PASS
+{"version":"v2","id":"T4/min","expected":{"added":true,"retainOnReject":false},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":""},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/max PASS
+{"version":"v2","id":"T4/max","expected":{"added":true,"retainOnReject":false},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":""},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T4/comma PASS
+{"version":"v2","id":"T4/comma","expected":{"added":true,"retainOnReject":false},"actual":{"added":true,"retained":false,"titleValue":"","hoursValue":"","customValidity":"","nativeReportRequested":false,"titleError":"","hoursError":""},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+[v2] T5 PASS
+{"version":"v2","id":"T5","expected":{"emptyCount":0,"total":"0 ч","percent":"0%","canAddAfterDelete":true},"actual":{"empty":{"tasks":[],"total":"0 ч","done":"0 ч","percent":"0%","visible":[]},"afterAdd":{"tasks":[{"id":"task-4","title":"После удаления","hours":1,"done":false}],"total":"1 ч","done":"0 ч","percent":"0%","visible":["После удаления"]}},"status":"PASS","scope":"Original JS with controlled DOM double; not a browser/UI check"}
+
+EXECUTION: original embedded JavaScript executed with node:vm and a controlled DOM double. No browser rendering or native HTML validation simulated. Fresh initial tasks for each independent test; v1 localStorage.getItem returns null.
+BROWSER: NOT RUN. Attempt to open file:///Users/daniel/Desktop/agents_hw1/tracker-v1.html was rejected: requested URL protocol is not allowed; allowed protocols http:, https:. No workaround attempted.
+UI visibility, physical button/form interaction, native validation popups, and 390px layout: NOT RUN for both versions.
+v1 source SHA256=e6f423b96b66fd4430edc0c2ddbaf0c3f2df20d917cbd465cfd427ce37a53e88
+v2 source SHA256=b5b4ebeffb926d47cbc0cabb8b782515316ec508f1b9698db7cfd95f270b2ffe
